@@ -5,11 +5,11 @@ sudo bash
 apt-get update
 apt-get install bind9
 ufw allow Bind9
-systemctl enable bind9
 
 cp server/etc/bind/* /etc/bind/
 named-checkconf
 named-checkzone jkristian.com /etc/bind/db.jkristian.com
 service bind9 restart
+systemctl enable bind9
 
 # https://www.webmin.com/

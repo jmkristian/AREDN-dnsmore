@@ -88,5 +88,7 @@ else
         cat "$NEW_RESOLV_FILE"
         echo # blank line
     fi
+    chmod +r "$NEW_RESOLV_FILE" || exit $?
     mv "$NEW_RESOLV_FILE" "$RESOLV_FILE" || exit $?
+    /etc/init.d/dnsmasq reload
 fi
