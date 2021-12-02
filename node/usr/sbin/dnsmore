@@ -1,0 +1,5 @@
+#!/bin/sh
+while [ true ]; do
+    "$0".sh "$@"
+    sleep 10
+done
