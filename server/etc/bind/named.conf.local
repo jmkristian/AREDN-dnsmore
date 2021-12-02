@@ -1,0 +1,12 @@
+// DNS server configuratio for this host.
+
+// Consider adding the 1918 zones here, if they're not used in your organization.
+// include "/etc/bind/zones.rfc1918";
+
+zone "jkristian.com" {
+  type master;
+  file "/etc/bind/zone.jkristian.com";
+  // Secondary DNS servers:
+  // allow-transfer { 192.0.2.2; };
+  // also-notify    { 192.0.2.2; };
+};
