@@ -1,3 +1,4 @@
 #!/bin/sh
+/usr/sbin/dnsmore -v upsert
 /etc/init.d/dnsmore enable
 /etc/init.d/dnsmore start
