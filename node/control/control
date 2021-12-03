@@ -1,5 +1,5 @@
 Package: dnsmore
-Version: 1.3
+Version: 1.0
 Architecture: all
 Description: A daemon that configures dnsmasq to query more DNS servers
 Maintainer: John Kristian W6JMK
