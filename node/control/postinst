@@ -1,0 +1,3 @@
+#!/bin/sh
+/etc/init.d/dnsmore enable
+/etc/init.d/dnsmore start

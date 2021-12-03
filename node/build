@@ -1,0 +1,11 @@
+#!/bin/sh
+cd `dirname "$0"` || exit $?
+mkdir -p built || exit $?
+(cd control &&\
+     tar --numeric-owner --group=0 --owner=0 -czf ../built/control.tar.gz *)
+(cd data &&\
+     tar --numeric-owner --group=0 --owner=0 -czf ../built/data.tar.gz *)
+cp debian-binary built/
+(cd built &&\
+     tar --numeric-owner --group=0 --owner=0 -czf dnsmore_1.2_all.ipk\
+     debian-binary data.tar.gz control.tar.gz)

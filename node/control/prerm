@@ -1,0 +1,5 @@
+#!/bin/sh
+/etc/init.d/dnsmore stop
+/etc/init.d/dnsmore disable
+echo > /etc/dnsmore.conf
+/usr/sbin/dnsmore.sh -v
