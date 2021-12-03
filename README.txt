@@ -1,8 +1,5 @@
-# On the AREDN node:
-sudo bash
-cp -r node/* /
-/etc/init.d/dnsmore start
-/etc/init.d/dnsmore enable
+node/build
+# Install node/built/dnsmore_*.ipk on the AREDN node.
 
 # On the DNS server:
 # https://serverspace.us/support/help/configure-bind9-dns-server-on-ubuntu/
