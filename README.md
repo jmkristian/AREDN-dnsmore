@@ -1,5 +1,5 @@
 # AREDN-dnsmore
-Here is software to enhances the DNS service in an AREDN network.
+Here is software to enhance the DNS service in an AREDN network.
 
 Standard DNS servers are connected to the AREDN network.
 See server/README.txt for directions for setting up a DNS server on Ubuntu or Debian.
