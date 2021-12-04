@@ -13,24 +13,27 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-if [ $# = 0 ]; then
-    # Upsert periodically, forever.
-    while [ true ]; do
-        "$0" upsert
-        sleep 10
-    done
-    exit 0
-fi
+# Configure dnsmasq to query the servers named in /etc/dnsmore.conf.
 
-CONF_FILE=/etc/dnsmore.conf
-START="# { $0"
-FINISH="# } $0"
 if [ "$1" = "-v" ]; then
     VERBOSE=true
     shift
 else
     VERBOSE=
 fi
+
+if [ $# = 0 ]; then
+    # Upsert periodically, forever.
+    while [ true ]; do
+        "$0" ${VERBOSE:+-v} upsert
+        sleep 10
+    done
+    exit 3 # WTF?
+fi
+
+CONF_FILE=/etc/dnsmore.conf
+START="# { $0"
+FINISH="# } $0"
 
 # Find the first resolv-file setting in the dnsmasq configuration file:
 RESOLV_FILE=$(\
@@ -82,7 +85,7 @@ elif [ "$1" = "upsert" ]; then
 
     # Insert the new DNS servers' addresses into NEW_RESOLV_FILE:
     if [ "$SERVERS" = "" ]; then
-        exec "$0" remove
+        exec "$0" ${VERBOSE:+-v} remove
     else
         HEAD=$(grep -n "^$START$" "$RESOLV_FILE" | head -1 | sed -e 's/:.*//')
         if [ "$HEAD" ]; then
@@ -108,7 +111,7 @@ elif [ "$1" = "upsert" ]; then
         fi
     fi
 else
-    echo 1>&2 "$0: unknown verb $1"
+    echo 1>&2 "usage: $0 [-v] [upsert|remove] # not $1"
     exit 2
 fi
 if cmp -s "$NEW_RESOLV_FILE" "$RESOLV_FILE"; then
