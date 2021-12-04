@@ -1,0 +1,17 @@
+
+include "/var/cache/bind/keys.{{ZONE}}";
+zone "{{ZONE}}" {
+  type master;
+  file "/var/cache/bind/db.{{ZONE}}";
+  update-policy {
+    // Permit updates to any record in this zone,
+    // using a key whose name = root of zone:
+    grant {{ZONE}} subdomain {{ZONE}}.;
+    // Permit updates to specific records,
+    // using keys whose name == name of record:
+    grant *.{{ZONE}} self *.{{ZONE}}.;
+  };
+  // If there are secondary (backup) DNS servers:
+  // allow-transfer { 10.x.x.x; };
+  // also-notify    { 10.x.x.x; };
+};

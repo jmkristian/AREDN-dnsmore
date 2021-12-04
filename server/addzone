@@ -1,0 +1,22 @@
+#!/bin/sh
+# Configure bind9 as the master server for the given zone.
+zone=$1
+if [ "$zone" = "" ]; then
+    echo 1>&2 "usage: $0 <zone>"
+    exit 1
+fi
+# Adapted from http://bahut.alma.ch/2013/01/personal-dynamic-dns.html
+cd `dirname "$0"` || exit $?
+etcdir="/etc/bind"
+binddir="/var/cache/bind"
+
+ddns-confgen -q -a hmac-md5 -k $zone -s $zone. > $binddir/keys.$zone
+chmod u=rw,g=r,o= $binddir/keys.$zone
+chown root:bind   $binddir/keys.$zone
+
+sed -e "s/{{ZONE}}/$zone/g" < db.template > $binddir/db.$zone
+sed -e "s/{{ZONE}}/$zone/g" < conf.template >> $etcdir/named.conf.local
+
+named-checkconf $etcdir/named.conf && \
+named-checkzone $zone $binddir/db.$zone && \
+service bind9 reload

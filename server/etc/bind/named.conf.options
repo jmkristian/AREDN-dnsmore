@@ -25,11 +25,9 @@ options {
 	allow-transfer { none; };
 //	listen-on-v6 { any; };
 	listen-on port 53 {
-//	  any;
-	  10.0.0.0/8;
+	  10.0.0.0/8; // any AREDN address
 	};
 	allow-query {
-//	  any;
-	  10.0.0.0/8;
+	  10.0.0.0/8; // any AREDN address
 	};
 };
