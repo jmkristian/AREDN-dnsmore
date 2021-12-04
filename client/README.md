@@ -49,3 +49,8 @@ for clients to see it. The old information is cached, for as long
 as the TTL time with which it was stored. Be patient. If you're
 experimenting, store experimental data with fairly short TTL's,
 so it won't take a long time to correct mistakes.
+
+On Linux, nsupdate is usually packaged in dnsutils or bind-utils.
+On Windows, nsupdate can be installed under
+[Cygwin](https://cygwin.com/index.html) or the
+[Windows Subsystem for Linux](https://docs.microsoft.com/en-us/windows/wsl/about).
