@@ -28,7 +28,8 @@ Give that key to the owner of the zone. If needed, you can create keys
 that enable updating a specific record (not any record in the zone).
 See the comments in /etc/bind/named.conf.local for clues about this.
 
-See ../client/README.txt for directions for updating records using nsupdate.
+See [../client/README.md](../client/README.md)
+for directions for updating records using nsupdate.
 
 Don't edit the db.zone files directly. Use nsupdate.
 
