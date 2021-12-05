@@ -18,7 +18,7 @@ and now the node is configured to forward queries to other servers.)
 As usual, you can't upload the .ipk file if the node is an active
 tunnel client. To handle this, disable the tunnel client, upload
 the .ipk file and then re-enable the tunnel client. Of course,
-this means your computer must be connected directly to the node.
+this means you can't upload the .ipk file via the tunnel.
 
 ## Writing
 
