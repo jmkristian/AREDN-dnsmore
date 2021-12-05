@@ -3,17 +3,21 @@ Here's how to set up a DNS server on Ubuntu or Debian.
 sudo bash
 apt-get update
 apt-get install bind9
-ufw allow Bind9 comment "DNS server"
-
 cp ./etc/bind/* /etc/bind/
 named-checkconf /etc/bind/named.conf
+# Add the option -4 into this line in /etc/systemd/system/bind9.service:
+# ExecStart=/usr/sbin/named -4 -f $OPTIONS
+systemctl daemon-reload
 service bind9 restart
 systemctl enable bind9
+ufw allow Bind9 comment "DNS server"
+cp etc/logrotate.d/bind /etc/logrotate.d/
 ```
-In your node's admin page 'Setup > Port Forwarding, DHCP and Services',
+In your AREDN node's admin page 'Setup > Port Forwarding, DHCP and Services',
 add an alias with:
 * IP Address = your DNS server computer, and
-* Alias Name = one of the names from ../client/data/etc/dnsmore.conf.
+* Alias Name = one of the names from
+  <a href="../client/data/etc/dnsmore.conf">../client/data/etc/dnsmore.conf</a>.
 
 As usual, make sure you don't redefine an existing alias.
 For example, don't make DNS-1 an alias for two different computers.

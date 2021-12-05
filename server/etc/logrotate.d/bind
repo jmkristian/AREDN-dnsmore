@@ -1,0 +1,8 @@
+/var/cache/bind/named.run {
+  daily
+  rotate 1
+  compress
+  dateext
+  missingok
+  notifempty
+}
