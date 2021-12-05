@@ -1,5 +1,5 @@
 #!/bin/sh
-# Configure bind9 as the master server for the given zone.
+# Configure bind9 as the primary server for the given zone.
 zone=$1
 if [ "$zone" = "" ]; then
     echo 1>&2 "usage: $0 <zone>"

@@ -1,12 +1,11 @@
-$ORIGIN .
 $TTL 300 ; 5 minutes
-{{ZONE}}	IN SOA	DNS-1.local.mesh. jmkristian.gmail.com. (
-				1
-				300
-				300
-				300
-				300
-				)
-		NS	DNS-1.local.mesh.
-		NS	DNS-2.local.mesh.
+{{ZONE}}.	IN SOA	DNS-1.local.mesh. postmaster.{{ZONE}}. (
+			1
+			300
+			300
+			300
+			300
+			)
+		IN NS	DNS-1.local.mesh.
+		IN NS	DNS-2.local.mesh.
 $ORIGIN {{ZONE}}.

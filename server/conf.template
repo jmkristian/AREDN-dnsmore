@@ -1,7 +1,7 @@
 
 include "/var/cache/bind/keys.{{ZONE}}";
 zone "{{ZONE}}" {
-  type master;
+  type primary;
   file "/var/cache/bind/db.{{ZONE}}";
   update-policy {
     // Permit updates to any record in this zone,

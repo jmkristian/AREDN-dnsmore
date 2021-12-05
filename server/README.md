@@ -26,6 +26,8 @@ For each DNS zone that you choose to publish from this server:
 ```bash
 sudo ./addzone <zone> # <zone> is the DNS name of the zone.
 ```
+This configures a simple primary zone. You might want to customize it.
+
 Use the RFC-2136 protocol to update records. The addzone script
 creates a key that can be used to update anything in the zone.
 Give that key to the owner of the zone. If needed, you can create keys
@@ -36,6 +38,10 @@ See [../client/README.md](../client/README.md)
 for directions for updating records using nsupdate.
 
 Don't edit the db.zone files directly. Use nsupdate.
+
+To provide reliable service, set up at least one slave server for every zone.
+The slave servers should also have names from dnsmore.conf
+(so clients will know how to query them).
 
 These directions were adapted from:
 * http://bahut.alma.ch/2013/01/personal-dynamic-dns.html
