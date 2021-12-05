@@ -1,4 +1,4 @@
-Here's how to set up a DNS server on Ubuntu or Debian.
+Here's how to set up a name server on Ubuntu or Debian.
 ```bash
 sudo bash
 apt-get update
@@ -10,12 +10,12 @@ named-checkconf /etc/bind/named.conf
 systemctl daemon-reload
 service bind9 restart
 systemctl enable bind9
-ufw allow Bind9 comment "DNS server"
+ufw allow Bind9 comment "DNS"
 cp etc/logrotate.d/bind /etc/logrotate.d/
 ```
 In your AREDN node's admin page 'Setup > Port Forwarding, DHCP and Services',
 add an alias with:
-* IP Address = your DNS server computer, and
+* IP Address = your name server computer, and
 * Alias Name = one of the names from
   <a href="../client/data/etc/dnsmore.conf">../client/data/etc/dnsmore.conf</a>.
 

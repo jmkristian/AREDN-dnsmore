@@ -1,6 +1,6 @@
 ## Reading
 
-To enable a client to read information from additional DNS servers:
+To enable a client to read information from additional name servers:
 
 `./build`
 
@@ -23,7 +23,7 @@ this means you can't upload the .ipk file via the tunnel.
 ## Writing
 
 To publish information via DNS, choose a zone name
-and ask the operator of a DNS server to help you publish it.
+and ask the operator of a name server to help you publish it.
 They'll give you a secret key. Store it in a file in this format:
 ```
 key "yourzone.com" {
@@ -36,7 +36,7 @@ Anyone who knows it can modify data in your zone.
 Restricting access to the file is recommended.
 
 Use [nsupdate](https://linux.die.net/man/8/nsupdate)
-to store information into the DNS server. For example:
+to store information into the name server. For example:
 ```
 nsupdate -k your.keyfile
 > server dns-1.local.mesh

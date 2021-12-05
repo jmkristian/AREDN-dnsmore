@@ -11,7 +11,7 @@ zone "{{ZONE}}" {
     // using keys whose name == name of record:
     grant *.{{ZONE}} self *.{{ZONE}}.;
   };
-  // If there are secondary (backup) DNS servers:
+  // If there are secondary (backup) name servers:
   // allow-transfer { 10.x.x.x; };
   // also-notify    { 10.x.x.x; };
 };
