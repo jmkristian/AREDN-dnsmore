@@ -28,6 +28,9 @@ sudo ./addzone <zone> # <zone> is the DNS name of the zone.
 ```
 This configures a simple primary zone. You might want to customize it.
 
+Don't configure a zone named local.mesh or any subdomain of local.mesh.
+Those domains should only be managed by the AREDN nodes.
+
 Use the RFC-2136 protocol to update records. The addzone script
 creates a key that can be used to update anything in the zone.
 Give that key to the owner of the zone. If needed, you can create keys

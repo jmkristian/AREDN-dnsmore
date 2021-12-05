@@ -1,20 +1,19 @@
 # AREDN-dnsmore
 Here is software to enhance the DNS service in an AREDN network.
-It enables the use of DNS names in zones other than local.mesh,
-and DNS records other than type A (IP address).
+It enables the use of domain names in zones other than local.mesh,
+with any record type.
 For example, CNAME records can define aliases for local.mesh names,
 and MX records can guide email forwarding.
 
-To implement this, standard name servers are connected to the AREDN network.
-See [server/README.md](server/README.md)
-for directions to set up a name server on Ubuntu or Debian.
+To implement this, standard name servers are added to the AREDN network.
+See [server/README.md](server/README.md) for directions to set up a name server.
 Data are stored into the servers using the RFC 2136 protocol.
-See [client/README.md](client/README.md) for directions for using nsupdate.
+See [client/README.md](client/README.md) for directions.
 
 A package is installed into AREDN nodes that causes them to
-forward queries to the name servers.
+forward queries to the additional name servers.
 See [client/README.md](client/README.md)
 for directions to build and install this package.
 
-The additional name servers should *not* define records in the local.mesh zone.
-That zone should only be managed by the core AREDN software.
+The additional name servers should *not* define records named *.local.mesh.
+Those names should only be managed by the core AREDN software.

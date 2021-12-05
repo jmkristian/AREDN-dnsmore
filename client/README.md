@@ -22,9 +22,13 @@ this means you can't upload the .ipk file via the tunnel.
 
 ## Writing
 
-To publish information via DNS, choose a zone name
-and ask the operator of a name server to help you publish it.
-They'll give you a secret key. Store it in a file in this format:
+To publish information via DNS, choose a zone name.
+That's a domain name, which will be a suffix of the names you publish.
+Don't choose local.mesh, or any name that ends with .local.mesh.
+(Those zones should only be managed by the AREDN nodes.)
+Ask the operator of a name server to help you publish your zone.
+They'll tell you the name of your primary name server and a secret key.
+Store the key in a file in this format:
 ```
 key "yourzone.com" {
   algorithm hmac-md5;
@@ -36,7 +40,7 @@ Anyone who knows it can modify data in your zone.
 Restricting access to the file is recommended.
 
 Use [nsupdate](https://linux.die.net/man/8/nsupdate)
-to store information into the name server. For example:
+to store information into the primary name server. For example:
 ```
 nsupdate -k your.keyfile
 > server dns-1.local.mesh
