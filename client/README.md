@@ -45,13 +45,15 @@ nsupdate -k your.keyfile
 > update add foo.yourzone.com. 300 TXT "Hello, world!"
 > send
 ```
+For Linux, nsupdate is usually packaged in dnsutils or bind-utils.
+For Windows, nsupdate.exe is included in the BIND 9 package from
+[ISC](https://www.isc.org/download/),
+or it can be installed in
+[Cygwin](https://cygwin.com/index.html) or
+[Windows Subsystem for Linux](https://docs.microsoft.com/en-us/windows/wsl/about).
+
 After you update information in the server, it will take some time
 for clients to see it. The old information is cached, for as long
 as the TTL time with which it was stored. Be patient. If you're
 experimenting, store experimental data with fairly short TTL's,
 so it won't take a long time to correct mistakes.
-
-On Linux, nsupdate is usually packaged in dnsutils or bind-utils.
-On Windows, nsupdate can be installed under
-[Cygwin](https://cygwin.com/index.html) or the
-[Windows Subsystem for Linux](https://docs.microsoft.com/en-us/windows/wsl/about).
