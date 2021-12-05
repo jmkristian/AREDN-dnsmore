@@ -10,7 +10,8 @@ Management > Upload Package', click 'Browse...', select the
 .ipk file and click 'Upload'.
 
 That node and all the computers connected to it will be able to
-resolve DNS names via the servers listed in data/etc/dnsmore.conf.
+resolve DNS names via the servers listed in
+[data/etc/dnsmore.conf](data/etc/dnsmore.conf).
 (The connected computers were already configured to query the node,
 and now the node is configured to forward queries to other servers.)
 
