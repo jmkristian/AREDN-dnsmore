@@ -4,60 +4,61 @@ To enable a client to read information from additional name servers:
 
 `./build`
 
-... and upload [built](built)/dnsmore_*.ipk to the client's AREDN node,
-using the node's 'Setup > Administration' page. Under 'Package
-Management > Upload Package', click 'Browse...', select the
-.ipk file and click 'Upload'.
+... and upload [built](built)/dnsmore_*.ipk to the client's AREDN node, using
+the node's 'Setup > Administration' page. Under 'Package Management > Upload
+Package', click 'Browse...', select the .ipk file and click 'Upload'.
 
-That node and all the computers connected to it will be able to
-resolve DNS names via the servers listed in
-[data/etc/dnsmore.conf](data/etc/dnsmore.conf).
-(The connected computers were already configured to query the node,
-and now the node is configured to forward queries to other servers.)
+That node and the computers directly connected to it will be able to read DNS
+records from the servers listed in
+[data/etc/dnsmore.conf](data/etc/dnsmore.conf). (The connected computers were
+already configured to query the node, and dnsmore configures the node to
+forward queries to the other servers.)
 
-As usual, you can't upload the .ipk file if the node is an active
-tunnel client. To handle this, disable the tunnel client, upload
-the .ipk file and then re-enable the tunnel client. Of course,
-this means you can't upload the .ipk file via the tunnel.
+As usual, you can't upload the .ipk file to a node that's an active tunnel
+client. You can disable the tunnel client, upload the .ipk file and then
+re-enable the tunnel client. Of course, this means you can't upload the .ipk
+file via the tunnel.
 
 ## Writing
 
-To publish information via DNS, choose a zone name.
-That's a domain name, which will be a suffix of the names you publish.
-Don't choose local.mesh, or any name that ends with .local.mesh.
-(Those zones should only be managed by the AREDN nodes.)
-Ask the operator of a name server to help you publish your zone.
-They'll tell you the name of your primary name server and a secret key.
-Store the key in a file in this format:
+To publish information via DNS, choose a zone. That's a domain name, which
+will be a suffix of the names you publish. Try not to choose a zone that
+someone else wants to manage. Don't choose local.mesh, or any name that ends
+with .local.mesh. (Those domains should only be managed by the AREDN nodes.)
+A zone that can't exist in the public Internet is a safe choice. If the zone
+exists or could exist in the public Internet, it's best if you own it there.
+But it's not required.
+
+Ask the operator of a name server to help you publish your zone. They'll tell
+you the name of your primary name server and a secret key. Store the key in a
+file in this format:
 ```
-key "yourzone.com" {
+key "yourzone.org" {
   algorithm hmac-md5;
   secret "bINaryCyberCrudD24CvBI==";
 };
 ```
-Keep the secret, secret.
-Anyone who knows it can modify data in your zone.
+Keep the secret, secret. Anyone who knows it can modify data in your zone.
 Restricting access to the file is recommended.
 
-Use [nsupdate](https://linux.die.net/man/8/nsupdate)
+You can use [nsupdate](https://linux.die.net/man/8/nsupdate)
 to store information into the primary name server. For example:
 ```
 nsupdate -k your.keyfile
 > server dns-1.local.mesh
-> zone yourzone.com.
-> update add foo.yourzone.com. 300 A 1.2.3.4
-> update add foo.yourzone.com. 300 TXT "Hello, world!"
+> zone yourzone.org.
+> update add foo.yourzone.org. 300 A 1.2.3.4
+> update add foo.yourzone.org. 300 TXT "Hello, world!"
 > send
 ```
 For Linux, nsupdate is usually packaged in dnsutils or bind-utils.
 For Windows, nsupdate.exe is included in the BIND 9 package from
-[ISC](https://www.isc.org/download/),
-or it can be installed in
-[Cygwin](https://cygwin.com/index.html) or
+[ISC](https://www.isc.org/download/), or it can be installed in
+[Cygwin](https://cygwin.com/index.html) or the
 [Windows Subsystem for Linux](https://docs.microsoft.com/en-us/windows/wsl/about).
 
-After you update information in the server, it will take some time
-for clients to see it. The old information is cached, for as long
-as the TTL time with which it was stored. Be patient. If you're
-experimenting, store experimental data with fairly short TTL's,
-so it won't take a long time to correct mistakes.
+After you update DNS records in the server, it will take some time for clients
+to see the new data. The old records are cached, for as long as the TTL (time
+to live) with which they was stored. Be patient. If you're experimenting,
+store experimental data with fairly short TTL's, so it won't take a long time
+to correct mistakes.

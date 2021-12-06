@@ -1,4 +1,5 @@
-Here's how to set up a name server on Ubuntu or Debian.
+The dnsmore client software is designed to work with authoritative,
+nonrecursive name servers. Here's how to set one up on Ubuntu:
 ```bash
 sudo bash
 apt-get update
@@ -15,18 +16,21 @@ cp etc/logrotate.d/bind /etc/logrotate.d/
 ```
 In your AREDN node's admin page 'Setup > Port Forwarding, DHCP and Services',
 add an alias with:
-* IP Address = your name server computer, and
 * Alias Name = one of the names from
-  <a href="../client/data/etc/dnsmore.conf">../client/data/etc/dnsmore.conf</a>.
+  [../client/data/etc/dnsmore.conf](../client/data/etc/dnsmore.conf) and
+* IP Address = your name server computer.
 
-As usual, make sure you don't redefine an existing alias.
-For example, don't make DNS-1 an alias for two different computers.
+As usual, make sure you don't redefine an existing alias. For example,
+don't make DNS-1 an alias for two different computers (connected to
+different nodes).
 
 For each DNS zone that you choose to publish from this server:
 ```bash
-sudo ./addzone <zone> # <zone> is the DNS name of the zone.
+sudo ./addzone <zone> # the DNS name of the zone
 ```
-This configures a simple primary zone. You might want to customize it.
+This adds a simple primary zone. You might want to customize it, by
+editing the configuration files. Then run `service bind9 reload` to
+put the new configuration into effect.
 
 Don't configure a zone named local.mesh or any subdomain of local.mesh.
 Those domains should only be managed by the AREDN nodes.
@@ -40,11 +44,13 @@ See the comments in /etc/bind/named.conf.local for clues about this.
 See [../client/README.md](../client/README.md)
 for directions for updating records using nsupdate.
 
-Don't edit the db.zone files directly. Use nsupdate.
+Don't edit the db.zone files directly. Use nsupdate. If you edit the files
+and also use nsupdate, the bind9 software is likely to get confused and
+make the zone invisible to clients.
 
 To provide reliable service, set up at least one slave server for every zone.
-The slave servers should also have names from dnsmore.conf
-(so clients will know how to query them).
+The slave servers should also have names from dnsmore.conf (so clients will
+know how to query them).
 
 These directions were adapted from:
 * http://bahut.alma.ch/2013/01/personal-dynamic-dns.html
