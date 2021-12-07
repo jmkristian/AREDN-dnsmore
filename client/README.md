@@ -26,8 +26,8 @@ will be a suffix of the names you publish. Try not to choose a zone that
 someone else wants to manage. Don't choose local.mesh, or any name that ends
 with .local.mesh. (Those domains should only be managed by the AREDN nodes.)
 A zone that can't exist in the public Internet is a safe choice. If the zone
-exists or could exist in the public Internet, it's best if you own it there.
-But it's not required.
+exists or could exist in the public Internet, it's best if you own it there
+(but it's not required).
 
 Ask the operator of a name server to help you publish your zone. They'll tell
 you the name of your primary name server and a secret key. Store the key in a
@@ -47,8 +47,8 @@ to store information into the primary name server. For example:
 nsupdate -k your.keyfile
 > server dns-1.local.mesh
 > zone yourzone.org.
-> update add foo.yourzone.org. 300 A 1.2.3.4
-> update add foo.yourzone.org. 300 TXT "Hello, world!"
+> update add smtp.yourzone.org. 300 MX 10 n0call-mailserver.local.mesh
+> update add  www.yourzone.org. 300 CNAME n0call-webserver.local.mesh
 > send
 ```
 For Linux, nsupdate is usually packaged in dnsutils or bind-utils.
