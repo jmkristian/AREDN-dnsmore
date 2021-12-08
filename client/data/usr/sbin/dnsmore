@@ -26,7 +26,7 @@ if [ $# = 0 ]; then
     # Upsert periodically, forever.
     while [ true ]; do
         "$0" ${VERBOSE:+-v} upsert
-        sleep 10
+        sleep 60
     done
     exit 3 # WTF?
 fi

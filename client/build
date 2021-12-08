@@ -8,6 +8,6 @@ rm -rf built/*
      tar --numeric-owner --group=0 --owner=0 -czf ../built/data.tar.gz *)
 cp -p debian-binary built/ || exit $?
 cd built || exit $?
-tar --numeric-owner --group=0 --owner=0 -czf dnsmore_1.1_all.ipk\
+tar --numeric-owner --group=0 --owner=0 -czf dnsmore_1.2_all.ipk\
     debian-binary data.tar.gz control.tar.gz\
     || exit $?
